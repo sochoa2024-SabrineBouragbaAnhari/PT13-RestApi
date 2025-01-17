@@ -66,7 +66,7 @@ fun BarraNavegacion(
         }
     }
 }
-//
+
 /**
  * Modelo de datos que representa un ítem de navegación.
  * @param route Ruta o destino al que navega este ítem.
@@ -75,7 +75,7 @@ fun BarraNavegacion(
  * @param unselectedIcon Ícono que se muestra cuando no está seleccionado.
  */
 data class NavigationItem(
-    val route: Any, // Ruta o destino al que navega este ítem.
+    val route: String, // Ruta o destino al que navega este ítem.
     val label: String, // Texto que se muestra en la pestaña.
     val selectedIcon: ImageVector, // Ícono que se muestra cuando está seleccionado.
     val unselectedIcon: ImageVector // Ícono que se muestra cuando no está seleccionado.
