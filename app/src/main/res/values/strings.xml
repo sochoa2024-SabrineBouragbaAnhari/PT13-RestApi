@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">T13-RestApi</string>
-    <string name="label_home">Rick y Morty</string>
-    <string name="label_favoritos">Favoritos</string>
 
 
 </resources>
