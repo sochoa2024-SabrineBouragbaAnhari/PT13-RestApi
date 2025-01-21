@@ -33,8 +33,7 @@ data class Personaje(
     val genero
         get() = when(gender.lowercase()){
             "male"->"Masculino"
-            "female"->"Femenino"
-            else -> "LGTBI+"
+            else -> "Femenino"
         }
 
     val fecha:String
