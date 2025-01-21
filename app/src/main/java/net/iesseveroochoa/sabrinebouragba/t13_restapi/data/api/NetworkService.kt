@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkService {
-    private const val URI_BASE = "https://rickandmortyapi.com/api/"
+    private val URI_BASE = "https://rickandmortyapi.com/api/"
 
     private val gson = GsonBuilder()
         .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
@@ -15,5 +15,6 @@ object NetworkService {
             .baseUrl(URI_BASE)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
+            .create(RickMOrtyService::class.java)
 
 }
