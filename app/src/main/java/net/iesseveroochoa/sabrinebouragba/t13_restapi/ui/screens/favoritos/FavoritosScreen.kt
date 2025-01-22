@@ -20,7 +20,7 @@ fun FavoritosScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(40.dp),
+            .padding(25.dp),
     ) {
         Text(
             text = "Favoritos",

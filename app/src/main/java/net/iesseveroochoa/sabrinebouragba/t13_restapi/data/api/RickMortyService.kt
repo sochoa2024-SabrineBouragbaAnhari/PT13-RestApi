@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.http.Url
 
-interface RickMOrtyService {
+interface RickMortyService {
     @GET("character")
     suspend fun listaPersonajes(
         @Query("page")

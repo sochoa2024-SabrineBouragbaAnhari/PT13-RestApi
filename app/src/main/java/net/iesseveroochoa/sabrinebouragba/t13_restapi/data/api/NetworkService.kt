@@ -15,6 +15,6 @@ object NetworkService {
             .baseUrl(URI_BASE)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
-            .create(RickMOrtyService::class.java)
+            .create(RickMortyService::class.java)
 
 }
