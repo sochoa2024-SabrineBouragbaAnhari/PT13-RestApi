@@ -39,64 +39,71 @@ fun PersonajeItem(
         modifier = Modifier
             .height(150.dp)
             .width(350.dp)
-            .padding(8.dp)
-            .background(gradient),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(Color.Transparent)
+            .padding(8.dp),
+        shape = RoundedCornerShape(25.dp),
+        colors = CardDefaults.cardColors(Color.Transparent),
+        onClick = onItemClick
     ) {
-        Row(
-            modifier = Modifier.fillMaxSize(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // Imagen del personaje
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(personaje.image)
-                    .build(),
-                placeholder = painterResource(R.drawable.loading),
-                error = painterResource(R.drawable.noimage),
-                contentDescription = personaje.name,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(120.dp)
-                    .padding(8.dp)
-                    .clip(RoundedCornerShape(16.dp))
-            )
-
-            // Información de los personajes
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(8.dp),
-                verticalArrangement = Arrangement.SpaceBetween,
-                horizontalAlignment = Alignment.Start
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(25.dp))
+                .background(gradient)
+        ){
+            Row(
+                modifier = Modifier.fillMaxSize(),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                // Nombre del personaje
-                Text(
-                    text = personaje.name,
-                    style = MaterialTheme.typography.titleLarge.copy(fontSize = 24.sp),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    color = Color.White,
+                // Imagen del personaje
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(personaje.image)
+                        .build(),
+                    placeholder = painterResource(R.drawable.loading),
+                    error = painterResource(R.drawable.noimage),
+                    contentDescription = personaje.name,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(120.dp)
+                        .padding(8.dp)
+                        .clip(RoundedCornerShape(16.dp))
                 )
 
-                // Especie del personaje
-                Text(
-                    text = personaje.especie,
-                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    color = Color.White
-                )
+                // Información de los personajes
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(8.dp),
+                    verticalArrangement = Arrangement.SpaceBetween,
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    // Nombre del personaje
+                    Text(
+                        text = personaje.name,
+                        style = MaterialTheme.typography.titleLarge.copy(fontSize = 24.sp),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        color = Color.White,
+                    )
 
-                // Estado del personaje
-                Text(
-                    text = personaje.estado,
-                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 16.sp),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    color = Color.White
-                )
+                    // Especie del personaje
+                    Text(
+                        text = personaje.especie,
+                        style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        color = Color.White
+                    )
+
+                    // Estado del personaje
+                    Text(
+                        text = personaje.estado,
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 16.sp),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        color = Color.White
+                    )
+                }
             }
         }
     }
