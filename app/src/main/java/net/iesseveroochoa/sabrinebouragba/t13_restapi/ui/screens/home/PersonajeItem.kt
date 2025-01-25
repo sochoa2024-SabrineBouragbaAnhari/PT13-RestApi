@@ -1,6 +1,7 @@
 package net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.screens.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -14,6 +15,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,20 +39,32 @@ fun PersonajeItem(
         end = Offset(1000f, 1000f)
     )
 
+    val RobotoFontFamily = FontFamily(
+        Font(R.font.roboto, FontWeight.Normal),
+        Font(R.font.roboto, FontWeight.Bold)
+    )
+
+    val LobsterFontFamily = FontFamily(
+        Font(R.font.lobster, FontWeight.Normal),
+        Font(R.font.lobster, FontWeight.Bold)
+    )
+
     Card(
         modifier = Modifier
             .height(150.dp)
             .width(350.dp)
             .padding(8.dp),
         shape = RoundedCornerShape(25.dp),
-        colors = CardDefaults.cardColors(Color.Transparent),
-        onClick = onItemClick
+        colors = CardDefaults.cardColors(Color.Transparent)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .clip(RoundedCornerShape(25.dp))
                 .background(gradient)
+                .clickable {
+                    onItemClick()
+                }
         ){
             Row(
                 modifier = Modifier.fillMaxSize(),
@@ -72,24 +88,29 @@ fun PersonajeItem(
                 // Información de los personajes
                 Column(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(8.dp),
-                    verticalArrangement = Arrangement.SpaceBetween,
-                    horizontalAlignment = Alignment.Start
+                        .fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     // Nombre del personaje
                     Text(
                         text = personaje.name,
-                        style = MaterialTheme.typography.titleLarge.copy(fontSize = 24.sp),
+                        fontSize = 28.sp,
+                        fontFamily = LobsterFontFamily,
+                        style = MaterialTheme.typography.titleLarge,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         color = Color.White,
                     )
 
+                    Spacer(modifier = Modifier.height(0.dp))
+
                     // Especie del personaje
                     Text(
                         text = personaje.especie,
-                        style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp),
+                        fontSize = 25.sp,
+                        fontFamily = RobotoFontFamily,
+                        style = MaterialTheme.typography.titleLarge,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         color = Color.White
@@ -98,7 +119,9 @@ fun PersonajeItem(
                     // Estado del personaje
                     Text(
                         text = personaje.estado,
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 16.sp),
+                        fontSize = 28.sp,
+                        fontFamily = RobotoFontFamily,
+                        style = MaterialTheme.typography.titleLarge,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         color = Color.White
