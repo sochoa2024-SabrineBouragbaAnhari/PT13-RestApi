@@ -79,7 +79,11 @@ fun AppNavigation() {
 
             // Función composable para la pantalla de favoritos
             composable(FavoritosDestination.route) {
-                FavoritosScreen()
+                FavoritosScreen(onPersonajeClick = { personaje ->
+                    // Convertir el objeto Personaje a JSON y codificarlo para la navegación
+                    val personajeJson = Uri.encode(personajeToJson(personaje))
+                    navController.navigate("detalle/$personajeJson")
+                })
             }
         }
     }
