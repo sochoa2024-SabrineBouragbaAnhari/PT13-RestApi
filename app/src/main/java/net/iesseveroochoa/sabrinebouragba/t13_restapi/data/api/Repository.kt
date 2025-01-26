@@ -3,8 +3,11 @@ package net.iesseveroochoa.sabrinebouragba.t13_restapi.data.api
 import android.content.Context
 import androidx.room.Room
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.data.db.database.PersonajeDataBase
+import net.iesseveroochoa.sabrinebouragba.t13_restapi.data.db.database.PersonajeDataBase.Companion.getDatabase
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.data.entity.PersonajeFavorito
+import net.iesseveroochoa.sabrinebouragba.t13_restapi.data.model.Personaje
 
 object Repository {
     // Servicio
@@ -20,10 +23,6 @@ object Repository {
         ).build()
     }
 
-    fun obtenerFavoritos(): Flow<List<PersonajeFavorito>> {
-        return database.personajeDao().getAllPersonajes()
-    }
-
     suspend fun agregarFavorito(personaje: PersonajeFavorito) {
         database.personajeDao().addPersonaje(personaje)
     }
@@ -34,5 +33,9 @@ object Repository {
 
     fun obtenerIdsFavoritos(): Flow<List<Int>> {
         return database.personajeDao().getIdsFavoritos()
+    }
+
+    fun obtenerPersonajesFavoritos(): Flow<List<PersonajeFavorito>> {
+        return database.personajeDao().getAllPersonajesFavoritos()
     }
 }
