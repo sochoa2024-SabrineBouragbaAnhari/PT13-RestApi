@@ -11,6 +11,6 @@ class PersonajeApplication: Application() {
         super.onCreate()
         application = this
 
-        Repository
+        Repository.initDatabase(this)
     }
 }

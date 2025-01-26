@@ -5,13 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.sqlite.db.SupportSQLiteDatabase
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.data.db.dao.PersonajeDao
-import net.iesseveroochoa.sabrinebouragba.t13_restapi.data.db.entity.Personaje
+import net.iesseveroochoa.sabrinebouragba.t13_restapi.data.entity.PersonajeFavorito
 
-@Database(entities = arrayOf(Personaje::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(PersonajeFavorito::class), version = 1, exportSchema = false)
 @TypeConverters(TransformaFechaSQLite::class)
 abstract class PersonajeDataBase: RoomDatabase() {
     abstract fun personajeDao(): PersonajeDao

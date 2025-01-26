@@ -18,7 +18,7 @@ import com.google.gson.Gson
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.data.model.Personaje
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.components.BarraNavegacion
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.components.NavigationItem
-import net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.screens.detalle.TarjetaPersonaje
+import net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.screens.detalle.DetalleScreen
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.screens.favoritos.FavoritosScreen
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.screens.home.HomeScreen
 
@@ -70,8 +70,8 @@ fun AppNavigation() {
                     // Decodificar la cadena JSON y convertirla de nuevo a un objeto Personaje
                     val decodedJson = Uri.decode(personajeJson)
                     val personaje = jsonToPersonaje(decodedJson)
-                    TarjetaPersonaje(
-                        personajeJson = decodedJson,
+                    DetalleScreen(
+                        personaje = personaje,
                         onVolver = { navController.popBackStack() } // Navegar hacia atrás cuando se presiona el botón de volver
                     )
                 }

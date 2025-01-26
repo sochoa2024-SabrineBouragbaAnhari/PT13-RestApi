@@ -2,7 +2,15 @@ package net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.screens.detalle
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
-import com.google.gson.Gson
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.R
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.data.model.Personaje
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.components.AppBar
@@ -32,8 +39,8 @@ import net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.theme.ToxicGreen
 import java.util.Date
 
 @Composable
-fun TarjetaPersonaje(
-    personajeJson: String,
+fun DetalleScreen(
+    personaje: Personaje,
     onVolver: () -> Unit = {}
 ) {
 
@@ -42,8 +49,6 @@ fun TarjetaPersonaje(
         start = Offset(0f, 0f),
         end = Offset(1000f, 1000f)
     )
-
-    val personaje = Gson().fromJson(personajeJson, Personaje::class.java)
 
     val PressStartFontFamily = FontFamily(
         Font(R.font.pressstart, FontWeight.Normal),
@@ -164,8 +169,8 @@ fun TarjetaPersonaje(
 @Preview
 @Composable
 fun TarjetaPersonajePreview() {
-    TarjetaPersonaje(
-        personajeJson = Gson().toJson(
+    DetalleScreen(
+        personaje =
             Personaje(
                 id = 1,
                 name = "Rick Sanchez",
@@ -176,6 +181,6 @@ fun TarjetaPersonajePreview() {
                 image = "",
                 created = Date()
             )
-        )
+
     )
 }

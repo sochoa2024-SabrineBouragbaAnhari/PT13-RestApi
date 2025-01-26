@@ -2,13 +2,30 @@ package net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.screens.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -31,7 +48,9 @@ import java.util.Date
 @Composable
 fun PersonajeItem(
     personaje: Personaje,
-    onItemClick: () -> Unit = {}
+    idsFavoritos: List<Int>,
+    onItemClick: () -> Unit = {},
+    onFavoriteClick: (Personaje) -> Unit = {}
 ) {
     val gradient = Brush.linearGradient(
         colors = listOf(Color(0xFF43C6AC), Color(0xFF191654)),
@@ -48,6 +67,8 @@ fun PersonajeItem(
         Font(R.font.lobster, FontWeight.Normal),
         Font(R.font.lobster, FontWeight.Bold)
     )
+
+    val esFavorito = idsFavoritos.contains(personaje.id)
 
     Card(
         modifier = Modifier
@@ -107,7 +128,7 @@ fun PersonajeItem(
 
                     // Especie del personaje
                     Text(
-                        text = personaje.especie,
+                        text = personaje.species,
                         fontSize = 25.sp,
                         fontFamily = RobotoFontFamily,
                         style = MaterialTheme.typography.titleLarge,
@@ -118,7 +139,7 @@ fun PersonajeItem(
 
                     // Estado del personaje
                     Text(
-                        text = personaje.estado,
+                        text = personaje.status,
                         fontSize = 28.sp,
                         fontFamily = RobotoFontFamily,
                         style = MaterialTheme.typography.titleLarge,
@@ -128,23 +149,45 @@ fun PersonajeItem(
                     )
                 }
             }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp),
+                contentAlignment = Alignment.BottomEnd
+            ) {
+                IconButton(
+                    onClick = {
+                        onFavoriteClick(personaje)
+                    },
+                    modifier = Modifier.size(40.dp)
+                ) {
+                    Icon(
+                        imageVector = if (esFavorito) Icons.Default.Favorite
+                            else Icons.Default.FavoriteBorder,
+                        contentDescription = if (esFavorito) "Desmarcar favorito"
+                            else "Marcar como favorito",
+                        tint = if (esFavorito) Color.Red else Color.Gray
+                    )
+                }
+            }
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewPersonajeItem() {
-    PersonajeItem(
-        personaje = Personaje(
-            id = 1,
-            name = "Rick Sanchez",
-            status = "Alive",
-            species = "Human",
-            type = "",
-            gender = "Male",
-            image = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-            created = Date()
-        )
+fun PersonajeItemPreview() {
+    val personaje = Personaje(
+        id = 1,
+        name = "Rick Sanchez",
+        status = "Alive",
+        species = "Human",
+        type = "",
+        gender = "Male",
+        image = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+        created = Date()
     )
+    val idsFavoritos = listOf(1, 2, 3)
+    PersonajeItem(personaje = personaje, idsFavoritos = idsFavoritos)
 }

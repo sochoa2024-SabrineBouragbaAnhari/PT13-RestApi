@@ -6,16 +6,19 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
-import net.iesseveroochoa.sabrinebouragba.t13_restapi.data.db.entity.Personaje
+import net.iesseveroochoa.sabrinebouragba.t13_restapi.data.entity.PersonajeFavorito
 
 @Dao
 interface PersonajeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addPersonaje(personaje: Personaje)
+    suspend fun addPersonaje(personaje: PersonajeFavorito)
 
     @Delete
-    suspend fun delPersonaje(personaje: Personaje)
+    suspend fun delPersonaje(personaje: PersonajeFavorito)
 
-    @Query("SELECT * FROM personajes")
-    fun getAllPersonajes(): Flow<List<Personaje>>
+    @Query("SELECT * FROM personajes_favoritos")
+    fun getAllPersonajes(): Flow<List<PersonajeFavorito>>
+
+    @Query("SELECT id FROM personajes_favoritos")
+    fun getIdsFavoritos(): Flow<List<Int>>
 }

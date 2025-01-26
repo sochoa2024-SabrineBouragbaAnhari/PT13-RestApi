@@ -13,6 +13,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -30,12 +32,9 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.R
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.data.model.Personaje
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.theme.AlienPurple
-import net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.theme.BrightYellow
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.theme.PortalGreen
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.theme.RickBlue
 import net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.theme.SoftPink
-import net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.theme.SpaceshipGrey
-import net.iesseveroochoa.sabrinebouragba.t13_restapi.ui.theme.ToxicGreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -58,6 +57,8 @@ fun HomeScreen(
 
     // recuperamos la lista de personajes como PagingItems
     val listaPersonajes = viewModel.personajes.collectAsLazyPagingItems()
+
+    val idsFavoritos by viewModel.idsFavoritos.collectAsState(initial = emptyList())
 
     Column(
         modifier = Modifier
@@ -116,10 +117,12 @@ fun HomeScreen(
                     //LazyColumn para mostrar los elementos
                     LazyColumn(modifier = modifier) {
                         items(listaPersonajes.itemCount) { index ->
-                            listaPersonajes[index]?.let {
+                            listaPersonajes[index]?.let { personaje ->
                                 PersonajeItem(
-                                    personaje = it,
-                                    onItemClick = { onPersonajeClick(it) }
+                                    personaje = personaje,
+                                    idsFavoritos = idsFavoritos,
+                                    onItemClick = { onPersonajeClick(personaje) },
+                                    onFavoriteClick = { viewModel.toggleFavorito(personaje) }
                                 )
                             }
                         }
@@ -140,7 +143,6 @@ fun HomeScreen(
                 }
             }
         }
-
     }
 }
 
